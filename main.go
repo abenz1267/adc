@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -35,14 +36,25 @@ const (
 )
 
 func main() {
-	args := os.Args[1:]
+	emailFlag := flag.String("email", "", "the email")
+	passwordFlag := flag.String("password", "", "the password")
+
+	flag.Parse()
 
 	email := os.Getenv("AD_EMAIL")
 	password := os.Getenv("AD_PASSWORD")
 
+	if *emailFlag != "" {
+		email = *emailFlag
+	}
+
+	if *passwordFlag != "" {
+		password = *passwordFlag
+	}
+
 	token := login(email, password)
 
-	switch args[0] {
+	switch os.Args[1:][0] {
 	case "start":
 		start(email, token)
 	case "stop":

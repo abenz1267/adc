@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+
+	"github.com/gen2brain/beeep"
 )
 
 // login: login/login
@@ -54,7 +56,14 @@ func start(email string, token AuthToken) {
 	status := virtualTerminal(email, "start", token)
 
 	if status == http.StatusOK {
-		log.Println("Started tracking...")
+		msg := "Started tracking..."
+
+		log.Println(msg)
+
+		err := beeep.Notify("askDANTE", msg, "assets/information.png")
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
 
@@ -62,7 +71,14 @@ func stop(email string, token AuthToken) {
 	status := virtualTerminal(email, "stop", token)
 
 	if status == http.StatusOK {
-		log.Println("Stopped tracking...")
+		msg := "Stopped tracking..."
+
+		log.Println(msg)
+
+		err := beeep.Notify("askDANTE", msg, "assets/information.png")
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }
 

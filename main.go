@@ -60,7 +60,7 @@ func main() {
 	case "stop":
 		stop(email, token)
 	default:
-		fmt.Println("Usage: askdante start|stop")
+		fmt.Println("Usage: adc start|stop")
 	}
 }
 
